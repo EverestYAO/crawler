@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import redis
 from multiprocessing.dummy import Pool as ThreadPool
+import os
 ip = '127.0.0.1'
 password = ''
 pool = redis.ConnectionPool(host=ip, port=6379, db=0, password=password)
@@ -39,4 +40,5 @@ pool = ThreadPool(10)
 pool.map(get_url, link_lis)
 pool.close()
 pool.join()
+os.system('python3 slave.py')
 
