@@ -1,0 +1,81 @@
+{% extends "bootstrap/base.html" %}
+<!--声明从bootstrap基础模板中延伸-->
+{% block title %}Flasky{% endblock %}
+<!--重新定义title-->
+{% block head %}
+{{ super() }}
+<!--继承和重新定义head-->
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+{% block navbar %}
+<div class="container-fluid">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<nav class="navbar navbar-Success" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">首页</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							 <a href="./action">动作片</a>
+						</li>
+						<li>
+							 <a href="./horrible">恐怖片</a>
+						</li>
+						<li>
+							 <a href="./comedy">喜剧片</a>
+						</li>
+						<li>
+							 <a href="./love">爱情片</a>
+						</li>
+						<li>
+							 <a href="./story">剧情片</a>
+						</li>
+						<li>
+							 <a href="./science">科幻片</a>
+						</li>
+						<li>
+							 <a href="./war">战争片</a>
+						</li>
+						<li>
+							 <a href="./record">纪录片</a>
+						</li>
+						<li>
+							 <a href="./cartoon">动漫</a>
+						</li>
+						<li>
+							 <a href="#">国产剧</a>
+						</li>
+						<li>
+							 <a href="./jpkorTV">日韩剧</a>
+						</li>
+						<li>
+							 <a href="#">欧美剧</a>
+						</li>
+					</ul>
+						<!--定义method为post的方式-->
+					<form class="navbar-form navbar-left" role="search"  method="POST">
+						<div class="form-group">
+							<!--输入框命名为searchkey-->
+							<input type="text" name="searchkey" class="form-control" />
+						</div> <button type="submit" class="btn btn-Primary">查找</button>
+					</form>
+					
+				</div>
+				
+			</nav>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<!--继承原来的scripts-->
+{{ super() }}
+{% endblock %}

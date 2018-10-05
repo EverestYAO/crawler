@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+<!--从base.html进行延伸-->
+{% block title %}Movie{% endblock %}
+{% block content %}
+<!--重新定义内容-->
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row">
+				
+				{% for movie in movies %}
+				<!--通过遍历循环的方式添加内容-->
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<img alt="300x200" src={{movie.pic}} />
+						<div class="caption">
+							<h3>
+								{{movie.title}}
+							</h3>
+
+							<p><!--生成电影详情的url，调用content视图函数-->
+								 <a class="btn btn-primary" href=/movie/{{movie.id}}>详情</a> 
+							</p>
+						</div>
+					</div>
+				</div>
+				 {% endfor %}
+				<!--停止循环-->
+			</div>
+		</div>
+	</div>
+</div>
+{% if pagination %}
+<div class="pagination">
+	<!--使用翻页宏，endpoint为路由-->
+    {{ macros.pagination_widget(pagination, e) }}
+</div>
+{% endif %}
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}

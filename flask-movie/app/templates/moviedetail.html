@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+<!--从base.html进行延伸-->
+{% block title %}Movie{% endblock %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h3>
+				{{film.title}}
+			</h3><img alt="440x440" src={{film.pic}} />
+			<h4>
+					简介
+			</h4>
+			<p>{{film.body}}
+			<h4>
+					演员
+			</h4>
+			<p>{{film.actor}}
+			<div class="row-fluid">
+				<div class="span12">
+					<h4>
+					下载链接
+					</h4>
+					<ul>	<!--使用遍历逐一添加下载地址，增加按钮方便下载-->
+						{% for i in url %}
+						<li>
+							{{i.title}}
+							{{i.url}}
+						<a class="btn btn-primary" type="button" href={{i.url}}>下载</a>
+						</li>
+						{%endfor%}
+				
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
