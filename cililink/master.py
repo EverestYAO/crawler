@@ -27,10 +27,11 @@ class master(object):
 
     def get_url(self,link):
         print(link)
-        res = requests.get(link, self.headers)
+        res = requests.get(link, headers)
         soup = BeautifulSoup(res.text,'html.parser')
         for i in soup.find_all('div',class_='panel-body'):
             item= 'https://www.kkcili.com/'+i.find('a').get('href')
+            print(item)
             self.r.sadd('link',item)
 
     def crawl(self):
@@ -43,6 +44,8 @@ class master(object):
         #temp=soup.find('ul',class_='pagination col-md-8').find_all('li')[-1].find('a').get('href')
         page=re.findall(r'\d*',soup.find('ul',class_='pagination col-md-8').find_all('li')[-1].find('a').get('href').split('-')[-1])[0]#获取页数
         link_lis=['https://www.kkcili.com/main-search-kw-%s-px-1-page-%s.html'%(name,str(i)) for i in range(1,int(page))]
+        for i in link_lis:
+            master().get_url(i)
 
     def check(self,name,key,number):
         for i in self.db.movie.find({'name':{'$regex':"{name}.*{key}".format(name=name,key=key)},'连接速度':"很快"}).limit(number):

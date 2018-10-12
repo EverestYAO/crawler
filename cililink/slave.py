@@ -4,6 +4,7 @@ from collections import ChainMap
 import redis
 from multiprocessing.dummy import Pool as ThreadPool
 from pymongo import MongoClient
+import traceback
 data=[]
 def start(url):
     headers = {
@@ -21,7 +22,7 @@ def start(url):
         item3 =ChainMap(item,item2)
         data.append(item3)
     except Exception:
-        print('eRRO')
+        traceback.print_exc()
 ip = '127.0.0.1'
 password = ''
 pool = redis.ConnectionPool(host=ip, port=6379, db=0, password=password)
