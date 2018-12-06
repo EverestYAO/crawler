@@ -1,7 +1,9 @@
 from flask import request,render_template, redirect,url_for
 from . import movie
-from ..models import Movie
+from ..models import Movie,Magnet
 from .form import SearchForm
+from .searchcrawl import crawl
+import time
 
 @movie.route('/movie/cartoon', methods=['GET', 'POST'])
 def cartoon():
@@ -108,5 +110,22 @@ def jpkorTV():
 def content(id):
 	film = Movie.query.get_or_404(id)#通过传入的id获取电影数据
 	return render_template('moviedetail.html', film=film,url=list(eval(film.url)))#渲染模板
+
+@movie.route('/movie/search', methods=['GET', 'POST'])
+def search():
+	if request.method =='POST':#用户点击提交后将参数post
+		searchkey=request.form.get('searchkey')
+		print(searchkey)
+		crawl(searchkey)
+		time.sleep(5)
+		page = request.args.get('page', 1, type=int)
+		pagination=Magnet.query.filter_by(key=searchkey).paginate(
+        page,per_page=10,
+        error_out=False)
+		searchresults = pagination.items
+		return render_template('magnetsearch.html', searchresults=searchresults)
+
+	return  render_template('magnetsearch.html')
+
 
 

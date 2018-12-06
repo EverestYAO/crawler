@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+<!--从base.html进行延伸-->
+{% block title %}Movie{% endblock %}
+{% block content %}
+<!--重新定义内容-->
+	<div class="container-fluid">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="page-header">
+				<h1>
+					磁力搜索 <small>寻你所爱</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<form class="navbar-form  navbar-right" role="search"  method="POST">
+					<div class="input-group">
+						<input type="text" class="form-control" name="searchkey" placeholder="请输入检索关键字">
+						<span class="input-group-btn">
+							<button class="btn btn-primary">检索</button>
+						</span>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table">
+
+				<tbody>
+				{% for searchresul in searchresults %}
+					<tr class="success">
+						<td>
+							{{searchresul.id}}
+						</td>
+						<td>
+							{{searchresul.title}}
+						</td>
+						<td>
+							{{searchresul.url}}
+						</td>
+						<td>
+							{{searchresul.file}}
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+	</div>
+
+
+{% endblock %}
