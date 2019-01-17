@@ -13,22 +13,11 @@ class MySpider(scrapy.Spider):
         for i in images:
             #url写入到item中提交
             items['image_urls'] =['http:'+ i.strip()] 
-            yield items
+            yield scrapy.Request(url=items['image_urls'][0],callback=self.parse_image)
+    def parse_image(self,response):
+        self.log('这里是%s'%response.url)
         
         self.log('A response from %s just arrived!' % response.url)
 
     def closed(self, reason):
         self.log("closed spider reason is %s" % reason)
-        mailer = MailSender(
-        smtphost = "smtp.aliyun.com",  # 发送邮件的服务器
-        mailfrom = "zaojue405@aliyun.com",   # 邮件发送者
-        smtpuser = "zaojue405@aliyun.com",   # 用户名
-        smtppass = "pegasus405",  # 发送邮箱的密码不是你注册时的密码，而是授权码！！！切记！
-        smtpport = 465   # 端口号
-        )
-        body = """
-        发送的邮件内容
-        """
-        subject = '发送的邮件标题'
-        # 如果说发送的内容太过简单的话，很可能会被当做垃圾邮件给禁止发送。
-        mailer.send(to="58153287@qq.com", subject = subject, body = body)

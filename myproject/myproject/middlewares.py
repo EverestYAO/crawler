@@ -6,8 +6,9 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-
-
+from myproject.settings import USER_AGENT_LIST
+import random
+from scrapy import log
 class MyprojectSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -101,3 +102,12 @@ class MyprojectDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+class RandomUserAgentMiddleware(object):
+    def process_request(self, request, spider):
+        ua  = random.choice(USER_AGENT_LIST)
+        if ua:
+           # request.headers.setdefault('User-Agent', ua)
+            request.headers['User-Agent'] = ua
+            spider.logger.info(request.headers['User-Agent'])
+        return None
