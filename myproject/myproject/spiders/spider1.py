@@ -8,7 +8,7 @@ class MySpider(scrapy.Spider):
 
 #爬虫名
 
-name = 'qiushibaike'
+    name = 'qiushibaike'
 
 #文字板块url
 
@@ -24,7 +24,7 @@ def parse(self, response):
 
         #定义items作为数据暂存容器
 
-items= MyprojectItem()
+        item= MyprojectItem()
 
         for i in contents:
 
