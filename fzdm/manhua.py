@@ -29,8 +29,10 @@ mh_list=[]
 
 def check_image_dir_exist(DIR):
     """ 检查目录是否存在，存在则删除， 不存在则新建 """
-    if not os.path.exists( 'd:\\manka\\%s'%DIR):
-        os.mkdir('d:\\manka\\%s'%DIR)
+
+    if  os.path.exists('d:\\manka\\%s' % DIR):
+        shutil.rmtree('d:\\manka\\%s'%DIR)
+    os.mkdir('d:\\manka\\%s' % DIR)
 
 async  def get_img(q,url):
     async with aiohttp.ClientSession() as session:

@@ -62,6 +62,10 @@ def story():
 
 @movie.route('/movie/love', methods=['GET', 'POST'])
 def love():
+	if request.method =='POST':
+		searchkey=request.form.get('searchkey')#提交按钮时输入的关键词
+		movies=Movie.query.filter(Movie.title.like('%{searchkey}%'.format(searchkey=searchkey))).all()#模糊查询数据库中包含关键词的数据
+		return render_template('movie.html',movies=movies)#渲染模板
 	endpoint='movie.love'
 	page = request.args.get('page',1, type=int)
 	pagination = Movie.query.filter_by(movietype='爱情片').paginate(

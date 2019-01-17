@@ -36,7 +36,7 @@ class master(object):
 
     def crawl(self):
         url = 'https://www.kkcili.com/main-search-kw-%s-px-1-page-1.html' % name
-        print(headers['user-agent'])
+        print(url)
         res= requests.get(url,headers)
         res.encoding='utf-8'
         soup = BeautifulSoup(res.text,'html.parser')
@@ -58,6 +58,7 @@ if 'crawl' in sys.argv[1] :
     name = sys.argv[2]
     print(name)
     master.crawl(name)#启动爬虫
+    os.popen(r'python3 slave.py')
 elif 'check' in sys.argv[1]:
     name = sys.argv[2]
     key=''
