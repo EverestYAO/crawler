@@ -24,8 +24,9 @@ def crawl():
 
 @app.route('/qiubai',methods=['GET'])
 def QIUBAI():
+    #time.sleep(15)
     content=crawl()
-    return content
+    return 'finished'
 if __name__ == '__main__':
     app.run(host=('0.0.0.0'),port=5000,debug=True)
 
