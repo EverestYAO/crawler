@@ -16,10 +16,8 @@ class MGClient(object):
     def __init__(self):
         try:
             #正式环境
-            #uri = "mongodb://root:Scrapy123@dds-wz962ff5b9eb15941102.mongodb.rds.aliyuncs.com:3717,dds-wz962ff5b9eb15942349.mongodb.rds.aliyuncs.com:3717/admin?replicaSet=mgset-2406913"
+           
             uri = "mongodb://127.0.0.1:27017/"
-            #uri = "mongodb://readWriter:readWriter17@112.90.89.17:27017/"
-            #uri = "mongodb://admin:silutiandi123@192.168.1.236:27017"
             self.c = MongoClient(uri)
         except Exception as e:
             sys.stderr.write("Could not connect to MongoDB: %s" % e)
